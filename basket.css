@@ -1,0 +1,714 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Базовий стиль для body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Це дозволить враховувати відступи в загальному розмірі елементів */
+    width: 100%; /* Забезпечує повну ширину на всіх екранах */
+    overflow-x: hidden; /* Приховує горизонтальний скрол */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #285a1e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
+justify-content: center; /* Центруємо вміст по горизонталі */
+}
+    
+/* Хедер */
+.header {
+background-color: #004d00; /* Темно-зелений фон */
+color: white;
+padding: 20px 0;
+}
+
+.header .container {
+display: flex; /* Використання Flexbox */
+justify-content: space-between; /* Розташування елементів по краях */
+align-items: center; /* Вирівнювання по вертикалі */
+max-width: 1200px; /* Обмеження ширини контейнера */
+margin: 0 auto; /* Вирівнювання контейнера по центру */
+padding: 0 15px; /* Відступи від країв */
+}
+
+.header .logo {
+font-size: 22px;
+margin: 0; /* Забираємо зайві відступи */
+font-family: 'Times New Roman', Times, serif;
+font-weight: 100;
+}
+
+.header .navigation {
+display: flex; /* Вирівнювання навігаційних посилань в рядок */
+gap: 20px; /* Проміжок між посиланнями */
+}
+
+.header .navigation a {
+    padding: 5px 10px;
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+    color: #f0fff0;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header .navigation a:hover {
+    background-color: #f9f9f9;
+    color: #004d00;
+    text-decoration: underline; /* Підкреслення при наведенні */
+}
+/* Адаптивний хедер для екранів 700px - 350px */
+@media (max-width: 750px) {
+.header .container {
+    
+    flex-direction: column; /* Елементи розташовуються в стовпчик */
+    align-items: center; /* Центрування елементів */
+    text-align: center; /* Вирівнювання тексту по центру */
+}
+
+.header .logo {
+    
+    margin-bottom: 15px; /* Відступ між логотипом та навігацією */
+    font-size: 26px; /* Збільшуємо розмір логотипа для акценту */
+}
+
+.header .navigation a {
+    font-size: 16px; /* Зменшення розміру шрифту */
+}
+}
+
+
+/* Основні стилі для каталогу */
+.catalog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.catalog-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #09470a;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #09470a;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.cart-item-header{
+    color: white;
+    background-color: #09470a;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.cart-item-header, .cart-item-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; /* 6 рівних колонок */
+    text-align: center;
+    border-bottom: 1px solid #ddd; /* Нижня риска для розділення рядків */
+}
+
+.cart-item-header div, .cart-item-body div {
+    border-right: 1px solid #ddd; /* Вертикальні риски між колонками */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-header div:last-child, .cart-item-body div:last-child {
+    border-right: none; /* Прибираємо риску для останньої колонки */
+}
+
+
+.cart-item-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.cart-item-quantity input,
+.cart-item-price input {
+    width: 90%;
+    padding: 5px;
+    text-align: center;
+    border-color: #09470a;
+    font-size: 16px;
+   
+}
+
+.cart-item-article input{
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+    color: #09470a;
+}
+.cart-item-width span,
+.cart-item-height span {
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+    color: #09470a; /* Колір тексту */
+}
+
+@media (max-width: 700px) {
+    .cart-item {
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+
+    .cart-item-header, .cart-item-body {
+        display: flex; /* Використовуємо flexbox */
+        flex-direction: row; /* Розташовуємо елементи в рядок */
+        justify-content: space-between; /* Розподіляємо простір між елементами */
+        align-items: center; /* Вирівнюємо по центру вертикально */
+        border-bottom: 1px solid #ddd; /* Горизонтальна риска для розділення рядків */
+        gap: 10px; /* Відступи між елементами */
+    }
+
+    .cart-item-header div, .cart-item-body div {
+        flex: 1; /* Кожен елемент займає рівну частину простору */
+        text-align: center;
+        padding: 8px;
+        font-size: 14px; /* Зменшений розмір тексту */
+        border-right: 1px solid #ddd; /* Вертикальні риски між елементами */
+    }
+
+    .cart-item-header div:last-child, .cart-item-body div:last-child {
+        border-right: none; /* Прибираємо праву риску для останнього елемента */
+    }
+
+    .cart-item-image img {
+        max-width: 80px; /* Обмежуємо розмір зображення */
+        height: auto;
+    }
+
+    .cart-item-quantity input,
+    .cart-item-price input {
+        width: 100%; /* Ширина на весь доступний простір */
+        font-size: 15px;
+        padding: 5px;
+    }
+
+    .cart-item-article input {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .cart-item-width span,
+    .cart-item-height span {
+        font-size: 16px;
+        text-align: center;
+    }
+}
+
+.cart-item-remove .remove-btn {
+    background-color: #004d00; /* Яскравий червоний колір для кнопки */
+    color: #fff; /* Білий текст */
+    border: none; /* Без рамок */
+    border-radius: 8px; /* Злегка округлені кути */
+    padding: 8px 16px; /* Внутрішні відступи */
+    font-size: 14px; /* Розмір шрифту */
+    cursor: pointer; /* Індикатор клікабельності */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Анімації */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легке тінювання */
+}
+
+.cart-item-remove .remove-btn:hover {
+    background-color: #09470a; /* Світліший червоний при наведенні */
+    transform: scale(1.05); /* Легке збільшення кнопки */
+}
+
+.cart-item-remove .remove-btn:active {
+    background-color: #228b24; /* Темніший червоний при натисканні */
+    transform: scale(0.95); /* Легке зменшення для ефекту натискання */
+}
+
+.cart-item-remove .remove-btn:focus {
+    outline: none; /* Забираємо стандартний фокус */
+    box-shadow: 0 0 4px 2px (255, 77, 79, 0.5); /* Підсвічування кнопки */
+}
+
+/* Стилі для контейнера кнопок */
+.buttons-container {
+    display: flex;
+    gap: 10px; /* Відстань між кнопками */
+    justify-content: flex-start; /* Вирівнювання кнопок по лівому краю */
+    align-items: center; /* Вирівнювання по вертикалі */
+}
+.buttons-section {
+    display: flex;
+    justify-content: center; /* Вирівнювання кнопок по центру */
+    gap: 15px; /* Проміжок між кнопками */
+    margin-top: 20px; /* Відступ зверху */
+}
+/* Стилі для кнопок */
+ .continue-shopping {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #004d00;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #004d00;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+button:hover, .continue-shopping:hover {
+    background-color: #004d00;
+    color: white;
+}
+
+@media (max-width: 700px) {
+    .cart-item{
+        flex-direction: row;
+    }
+    .cart-item-header, .cart-item-body {
+        flex-wrap: wrap; /* Дозволяємо перенос елементів на наступний рядок */
+        gap: 5px; /* Менші відступи між елементами */
+    }
+
+    .cart-item-header div, .cart-item-body div {
+        flex: 0 0 100%; /* Елементи займають всю ширину */
+        text-align: left; /* Вирівнювання тексту ліворуч */
+        font-size: 14px; /* Ще зменшений розмір тексту */
+        border-right: none; /* Прибираємо вертикальні риски */
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+    .cart-item-header .cart-item-image {
+        flex: 1;
+        text-align: center;
+        height: 104px;
+    }
+    .cart-item-image img {
+        max-width: 100%; /* Зображення займає всю ширину */
+        margin: 0 auto;
+        height: 100px;
+    }
+
+.cart-item-image1{
+    height: 105px;
+}
+
+    .cart-item-quantity input,
+    .cart-item-price input {
+        font-size: 17px;
+        padding: 4px;
+    }
+
+    .cart-item-width span,
+    .cart-item-height span {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
+
+.personal-data {
+    background-color: #f9f9f9; /* Світло-блакитний фон для виділення секції */
+    border: 1px solid #d0d7e0; /* Світлий обвід для секції */
+    border-radius: 8px; /* Згладжені кути */
+    padding: 20px; /* Внутрішній відступ */
+    margin-bottom: 20px; /* Відступ знизу для розділення секцій */
+    width: 100%; /* Максимальна ширина */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Легка тінь для об'єму */
+}
+
+.personal-data h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #09470a;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.personal-data  {
+    display: flex;
+    flex-direction: column;
+}
+
+.personal-data label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #09470a;
+}
+
+.personal-data input[type="text"],
+.personal-data input[type="tel"] {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.personal-data input[type="text"]:focus,
+.personal-data input[type="tel"]:focus {
+    border-color: #007bff;
+}
+
+.personal-data select {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.personal-data select:focus {
+    border-color: #09470a;
+    outline: none;
+}
+
+.personal-data select option {
+    padding: 10px;
+}
+
+
+/* Спосіб доставки */
+
+.delivery-method-block {
+margin: 2px;
+padding: 20px;
+width: 100%;
+background-color: #f9f9f9;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+box-sizing: border-box;
+margin-top: 20px;
+}
+
+.delivery-method-block h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #09470a;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 12px;
+}
+
+.radio-option {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #004d00;
+    margin-left: 20px;
+}
+
+.delivery-fields {
+    margin-top: 10px;
+}
+
+.delivery-fields label {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #004d00;
+}
+
+.delivery-fields input, .delivery-fields select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#ukrposhta-fields {
+    display: flex; /* Використовуємо flexbox */
+    flex-direction: column; /* Елементи розташовані вертикально */
+   
+    border-radius: 8px; /* Згладжені кути */
+    padding: 20px; /* Внутрішній відступ */
+    margin-top: 15px; /* Відступ зверху для відділення секції */
+    width: 100%; /* Ширина контейнера */
+   
+}
+
+#ukrposhta-fields label, #nova-poshta-fields {
+    display: block; /* Розташування лейблів у стовпчик */
+    margin-bottom: 5px; /* Відступ знизу для тексту лейбла */
+    font-size: 16px; /* Розмір шрифту */
+    font-weight: 500; /* Напівжирний текст */
+    color: #09470a; /* Темно-зелений текст */
+}
+
+#ukrposhta-fields input,#np-region-input, #np-city-input,
+#np-branch-input {
+    width: 100%; /* Поля заповнюють ширину контейнера */
+    padding: 10px; /* Внутрішній відступ для зручності */
+    margin-bottom: 15px; /* Відступ між полями */
+    border: 1px solid #ccc; /* Світла рамка */
+    border-radius: 4px; /* Згладжені кути */
+    background-color: #fff; /* Білий фон */
+    font-size: 14px; /* Розмір шрифту */
+    box-sizing: border-box; /* Включає padding у розмір поля */
+    height: 40px; /* Висота полів */
+}
+
+#ukrposhta-fields input:focus {
+    border-color: #5b9bd5; /* Синя рамка при фокусі */
+    outline: none; /* Забирає стандартне обведення браузера */
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5); /* Світіння при фокусі */
+}
+/* Стилі для виведення підказок міст */
+#city-suggestions,#branch-select {
+
+top: 100%; /* Розташовуємо список під полем вводу */
+left: 0;
+right: 0;
+max-height: 200px;
+overflow-y: auto; /* Додаємо вертикальну прокрутку */
+
+border: 1px solid #ccc;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+z-index: 1000; /* Щоб список був поверх інших елементів */
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+  
+/* Стилі для елементів списку */
+#city-suggestions li {
+padding: 8px 12px;
+cursor: pointer;
+font-size: 14px;
+}
+
+/* При наведенні на елемент списку змінюється фон */
+#city-suggestions li:hover {
+background-color: #ccc;
+}
+  
+  /* Стилі для елемента вводу міста */
+#city {
+width: 100%;
+padding: 8px 12px;
+font-size: 14px;
+border: 1px solid #ccc;
+border-radius: 4px;
+color: #004d00;
+}
+  
+/* При фокусі на інпуті */
+#city:focus {
+outline: none;
+border-color: #004d00;
+}
+  
+  /* Стилі для вибору відділення пошти */
+#branch-select {
+    width: 100% !important;
+    height: 40px;
+    padding: 5px 12px !important;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    color: #004d00;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: 400;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+  
+/* При фокусі на відділенні */
+#branch-select:focus {
+    outline: none;
+    border-color: #004d00;
+}
+
+/* Контейнер випадаючого списку */
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+/* Випадаючий список */
+.dropdown-list {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    display: none; /* Прихований за замовчуванням */
+}
+
+/* Відображення списку */
+.dropdown-list.visible {
+    display: block;
+}
+
+/* Список міст */
+.dropdown-list li {
+    padding: 8px;
+    cursor: pointer;
+    font-family: 'Times New Roman', serif;
+}
+
+.dropdown-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.payment-method {
+    margin: 2px;
+    padding: 20px;
+    width: 100%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.payment-method h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* Центрує текст */
+    color: #09470a;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.payment-method {
+    display: flex; /* Використовуємо flexbox */
+    flex-direction: column; /* Елементи розташовані вертикально */
+    border-radius: 8px; /* Згладжені кути */
+    padding: 20px; /* Внутрішній відступ */
+    margin-top: 15px; /* Відступ зверху для розділу */
+    width: 100%; /* Ширина контейнера */
+}
+
+.payment-method label {
+    display: flex; /* Використовуємо flexbox для розташування тексту і радіокнопки */
+    align-items: center; /* Вирівнюємо елементи по центру вертикально */
+    margin-bottom: 15px; /* Відступ між опціями */
+    font-size: 16px; /* Розмір тексту */
+    font-weight: 500; /* Напівжирний текст */
+    color: #09470a; /* Темно-зелений текст */
+    margin-left: 20px;
+}
+
+.payment-method input[type="radio"] {
+    margin-right: 10px; /* Відступ між кнопкою і текстом */
+    accent-color: #5b9bd5; /* Колір радіокнопки */
+    width: 16px; /* Розмір радіокнопки */
+    height: 16px; /* Розмір радіокнопки */
+    cursor: pointer; /* Зміна курсора на вказівник */
+}
+
+
+#account-details p {
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: #000; /* Колір тексту */
+    margin-left: 20px;
+}
+
+#account-details p strong {
+    font-weight: bold;
+    color: #000; /* Колір для виділених елементів (наприклад, номер рахунку) */
+}
+
+/* Стилі для кнопки */
+.order-form button {
+    padding: 12px 20px;
+    background-color: #09470a;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.order-form button:hover {
+    background-color: #228b24;
+}
+
+.order-form button:focus {
+    outline: none;
+}
+
+.comment-block {
+    margin: 20px auto;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; /* Враховує padding в загальній ширині */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-block h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* Центрує текст */
+    color: #09470a;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.comment-block textarea {
+    width: 100%;
+    max-width: 100%; /* Поле не вийде за межі батьківського блоку */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #004d00;
+    resize: vertical; /* Дозволяє змінювати висоту */
+    box-sizing: border-box; /* Ураховує padding в ширині */
+}
+
+

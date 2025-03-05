@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="product.css">
+    
+   
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+     <!-- Header -->
+<header class="header">
+    <div class="container">
+        <h1 class="logo">Curtain Sofiya</h1>
+        <nav class="navigation">
+            <a href="index.html">Головна</a>
+            <a href="index.html#about">Про нас</a>
+            <a href="index.html#payment">Оплата і доставка</a>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <header class="header-tittle">
+        <h1 class="logo">Детальніше</h1>
+    </header>
+
+<div class="product-detail">
+    <div class="image-gallery">
+        <img id="main-image" src="placeholder.jpg" alt="Product Image">
+        <div class="thumbnail-gallery">
+            <!-- Динамічно додаються мініатюри -->
+        </div>
+    </div>
+
+    <div class="product-info">
+        <p class="status">Опис товару</p>
+        <h2 class="product-title">Назва товару</h2>
+        <p class="product-code">Артикул: 000</p>
+        <p class="price">0 грн/м</p>
+
+        
+        <h3>Опис товару</h3>
+        <p class="detailed-description">Детальний опис товару буде тут.</p>
+    
+        
+            <!-- Розділ характеристик -->
+    <h3>Характеристики</h3>
+    <table class="characteristics">
+        <!-- Характеристики додаються динамічно -->
+    </table>
+    </div>
+</div>           
+    
+<div class="price-calculation2">
+    <h2 class="section-title">Калькулятор вартості пошитого виробу</h2>
+    <div class="input-group">
+        <label for="length">Введіть ширину штор (м):</label>
+        <input type="number" id="length" min="1" placeholder="Ширина в метрах" onkeydown="handleEnter2(event)">
+    </div>
+    <div class="input-group">
+        <label for="height">Розміри висота (м): <span style="color: red;">*</span></label>
+        <input type="number" id="height" min="1" placeholder="Висота (м)">
+    </div>
+    <div class="tooltip-container">
+        <button type="button" onclick="calculatePrice2()" class="calculate-button">Розрахувати</button>
+    </div>
+    <p class="hint">* Натисніть "Розрахувати" для обчислення ціни</p>
+    <div class="price-details2">
+        <p>Ціна за метр тюля: <strong id="modal-price">--</strong> грн</p>
+        <p>Ціна стрічки: <strong>10</strong> грн/м</p>
+        <p>Вартість роботи: <strong>60</strong> грн/м</p>
+    </div>
+    <p id="total-price" class="total-price"><strong>Загальна вартість:</strong> -- грн</p>
+    <p class="hint">* Щоб замовити, натисніть "Додати в кошик"</p>
+</div>
+
+<div class="button-group">
+    <!-- Кнопка "Додати в кошик" -->
+    <button class="add-to-cart" onclick="addToCart()">
+        Додати в кошик <i class="fas fa-shopping-cart"></i>
+    </button>
+
+    <!-- Кнопка "Повернутись назад" -->
+    <button class="go-back" onclick="window.history.back();">
+        <i class="fas fa-arrow-left"></i> Повернутись назад
+    </button>
+</div>
+
+
+
+<script src="card.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const productDetails = JSON.parse(sessionStorage.getItem('productDetails'));
+    
+        if (productDetails) {
+            // Головне зображення
+            document.getElementById('main-image').src = productDetails.mainImage;
+    
+            // Назва товару
+            document.querySelector('.product-title').textContent = productDetails.title;
+    
+            // Артикул
+            document.querySelector('.product-code').textContent = `Артикул: ${productDetails.article}`;
+    
+            // Ціна
+            document.querySelector('.price').textContent = `${productDetails.price} грн/м`;
+    
+            // Опис
+            document.querySelector('.detailed-description').textContent = productDetails.detailedDescription;
+    
+            // Додаткові зображення
+            const thumbnailGallery = document.querySelector('.thumbnail-gallery');
+            productDetails.additionalImages.forEach(imageSrc => {
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = 'Додаткове зображення';
+                img.classList.add('thumbnail');
+                img.addEventListener('click', () => changeImage(imageSrc));
+                thumbnailGallery.appendChild(img);
+            });
+    
+            // Характеристики
+            const characteristicsTable = document.querySelector('.characteristics');
+            productDetails.characteristics.forEach(char => {
+                const row = document.createElement('tr');
+                const keyCell = document.createElement('td');
+                const valueCell = document.createElement('td');
+                keyCell.textContent = char.key;
+                valueCell.textContent = char.value;
+                row.appendChild(keyCell);
+                row.appendChild(valueCell);
+                characteristicsTable.appendChild(row);
+            });
+        }
+    });
+    
+    // Функція для зміни головного зображення
+    function changeImage(imageSrc) {
+        const mainImage = document.getElementById('main-image');
+        mainImage.src = imageSrc;
+    }
+</script>
+<script>
+    // Функція для отримання ціни за метр тюля
+    function getPricePerMeter() {
+        const priceElement = document.querySelector('.price');
+        if (priceElement) {
+            return parseFloat(priceElement.textContent.replace(' грн/м', '').trim());
+        }
+        return 0; // Значення за замовчуванням, якщо ціна не знайдена
+    }
+
+    // Основна функція для розрахунку ціни
+    function calculatePrice2() {
+        const width = parseFloat(document.getElementById('length').value) || 0; // Ширина тюля
+        const height = parseFloat(document.getElementById('height').value) || 0; // Висота тюля
+        const ribbonPricePerMeter = 10; // Ціна за метр стрічки
+        const workCostPerMeter = 60; // Вартість роботи за метр
+
+        // Отримуємо ціну за метр тюля
+        const pricePerMeter = getPricePerMeter();
+
+        if (width > 0 && height > 0) {
+            // Розрахунок вартості
+            const tulleCost = pricePerMeter * width * height; // Ціна тюля
+            const ribbonCost = ribbonPricePerMeter * width; // Ціна стрічки
+            const workCost = workCostPerMeter * width; // Вартість роботи
+
+            const totalPrice = tulleCost + ribbonCost + workCost;
+
+            // Оновлюємо DOM
+            document.getElementById('modal-price').textContent = `${pricePerMeter.toFixed(2).replace(/\.00$/, '')} грн`;
+            document.getElementById('total-price').innerHTML = `<strong>Загальна вартість:</strong> ${totalPrice.toFixed(2).replace(/\.00$/, '')} грн`;
+        } else {
+            // Якщо значення введені неправильно
+            document.getElementById('total-price').innerHTML = '<strong>Загальна вартість:</strong> -- грн';
+            alert('Будь ласка, введіть коректні ширину і висоту тюля!');
+        }
+    }
+
+    // Функція для обробки натискання клавіші Enter
+    function handleEnter2(event) {
+        if (event.key === 'Enter') {
+            calculatePrice2();
+        }
+    }
+</script>
+        
+</body>
+</html>

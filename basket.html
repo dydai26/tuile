@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформити замовлення</title>
+    <link rel="stylesheet" href="basket.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <header class="header">
+       
+        <div class="container">
+            <h1 class="logo">Салон тюлей та штор Sofiya</h1>
+            <nav class="navigation">
+                <a href="index.html">Головна</a>
+              
+            </nav>
+        </div>
+    </header>
+
+<div class="catalog">
+    <h2 class="catalog-title">Оформити замовлення</h2>
+    <form class="order-form" action="ok.php" method="POST">
+        <!-- Товари в кошику -->
+        <div id="cart-items">
+            <!-- Товари динамічно додаються через JavaScript -->
+        </div>
+        <div class="cart-total" style="margin-bottom: 20px; text-align: right; font-weight: bold; font-size: 24px; font-family: 'Times New Roman', Times, serif;
+            color: #004d00;background: #f6f6f6;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+            margin-left: auto; padding:10px">
+                Загальна сума: <span id="cart-total">0.00</span> грн
+            </div>
+        
+        <!-- Особисті дані -->
+        <div class="personal-data">
+            <h3>Внесіть особисті дані</h3>
+            <label for="full-name">Прізвище та ім'я : <span style="color: red;">*</span></label>
+            <input type="text" id="full-name" name="full-name" placeholder="Введіть ваше прізвище та ім'я" required>
+        
+            <label for="phone-number">Мобільний номер: <span style="color: red;">*</span></label>
+            <input type="tel" id="phone-number" name="phone-number" placeholder="Введіть ваш мобільний номер" required>
+        </div>
+        <!-- Блок способу доставки -->
+<div class="delivery-method-block">
+<h3>Спосіб доставки</h3>
+
+<label class="radio-option">
+    <input type="radio" name="delivery-method" value="nova-poshta" onclick="toggleDeliveryFields('nova-poshta')" required>
+    Нова Пошта
+</label>
+
+<label class="radio-option">
+    <input type="radio" name="delivery-method" value="ukrposhta" onclick="toggleDeliveryFields('ukrposhta')">
+    Укрпошта
+</label>
+
+<!-- Поля для доставки Новою Поштою -->
+<div id="nova-poshta-fields" class="delivery-fields" style="display: none;">
+    <label for="city">Місто:</label>
+    <input type="text" id="city" placeholder="Почніть вводити місто" autocomplete="off">
+    <ul id="city-suggestions"></ul>
+
+    <label for="branch-select">Відділення пошти: <span style="color: red;">*</span></label>
+    <select id="branch-select" name="post-office" required>
+        <option value="">Оберіть відділення</option>
+    </select>
+</div>
+<!-- Поля для доставки Укрпоштою -->
+<div id="ukrposhta-fields" class="delivery-fields" style="display: none;">
+    <label for="region-input">Область: <span style="color: red;">*</span></label>
+    <input type="text" id="region-input" name="region" placeholder="Введіть область"required>
+
+    <label for="city-input">Місто: <span style="color: red;">*</span></label>
+    <input type="text" id="city-input" name="city" placeholder="Введіть місто" required>
+
+    <label for="postal-code-input">Індекс: <span style="color: red;">*</span></label>
+    <input type="text" id="postal-code-input" name="postal-code" placeholder="індекс" required>
+</div>
+</div>
+<!-- Спосіб оплати -->
+<div class="payment-method">
+    <h3>Спосіб оплати</h3>
+    <label for="likpay-radio">
+        <input type="radio" id="likpay-radio" name="payment-method" value="likpay">
+        Оплата через Liqpay або Приват 24
+    </label>
+    <label for="nal-radio">
+        <input type="radio" id="nal-radio" name="payment-method" value="nal">
+        Оплата при отриманні
+    </label>
+</div>
+<!-- Коментар -->
+<div class="comment-block">
+    <h3>Коментар</h3>
+    <textarea id="comment" name="comment" placeholder="Введіть ваш коментар.. Чи потрібно шити? Чи ні, або свої побажання щодо пошиття." rows="4"></textarea>
+</div>
+
+<!-- Відправка замовлення -->
+
+</form>
+<div class="buttons-section">
+    <form class="order-form" action="ok.php" method="POST">
+        <button type="submit">Замовити</button>
+    </form>
+    <a href="index.html" class="continue-shopping">Продовжити покупки</a>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    // Отримуємо параметри з URL
+    const image = params.get("image");
+    const article = params.get("article");
+    const width = params.get("width");
+    const height = params.get("height");
+    const totalPrice = params.get("totalPrice");
+
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotalElement = document.getElementById("cart-total");
+
+    // Функція для оновлення загальної суми
+    const updateCartTotal = () => {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let total = 0;
+        cartItems.forEach(item => {
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemQuantity = parseInt(item.quantity) || 1;
+            total += itemPrice * itemQuantity;
+        });
+        cartTotalElement.textContent = total.toFixed(2);
+    };
+
+    // Завантаження даних з localStorage
+    const loadCartItems = () => {
+        const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cartItemsContainer.innerHTML = ""; // Очищуємо контейнер перед завантаженням
+        savedCartItems.forEach(item => addCartItemToDOM(item));
+        updateCartTotal();
+    };
+
+    // Збереження даних у localStorage
+    const saveCartItems = () => {
+        const cartItems = [];
+        document.querySelectorAll(".cart-item").forEach(item => {
+            cartItems.push({
+                image: item.querySelector(".cart-item-image img").src,
+                article: item.querySelector(".cart-item-article input").value,
+                width: item.querySelector(".cart-item-width span").textContent,
+                height: item.querySelector(".cart-item-height span").textContent,
+                price: parseFloat(item.querySelector(".cart-item-price input").value) || 0,
+                quantity: 1 // Кількість за замовчуванням = 1
+            });
+        });
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        updateCartTotal();
+    };
+
+    // Додавання елемента товару в DOM
+    const addCartItemToDOM = ({ image, article, width, height, price, quantity = 1 }) => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+
+        cartItem.innerHTML = `
+        <div class="cart-item-header">
+            <div class="cart-item-image">Фото</div>
+            <div class="cart-item-article">Артикул</div>
+            <div class="cart-item-width">Ширина</div>
+            <div class="cart-item-height">Висота</div>
+            <div class="cart-item-price">Ціна</div>
+            <div class="cart-item-action">Дія</div>
+        </div>
+            <div class="cart-item-body">
+                <div class="cart-item-image">
+                    <img src="${image}" alt="Товар" width="100" />
+                </div>
+                <div class="cart-item-article">
+                    <input type="text" value="${article}" readonly />
+                </div>
+                <div class="cart-item-width">
+                    <span>${width}</span>
+                </div>
+                <div class="cart-item-height">
+                    <span>${height}</span>
+                </div>
+                <div class="cart-item-price">
+                    <input type="text" value="${price}" readonly />
+                </div>
+                <div class="cart-item-remove">
+                    <button class="remove-btn">Видалити</button>
+                </div>
+            </div>
+        `;
+
+        cartItemsContainer.appendChild(cartItem);
+
+        // Слухач для видалення товару
+        cartItem.querySelector(".remove-btn").addEventListener("click", () => {
+            cartItem.remove();
+            saveCartItems();
+        });
+    };
+
+    // Додавання нового товару з URL
+    if (image && article && width && height && totalPrice) {
+        const newItem = { image, article, width, height, price: totalPrice, quantity: 1 };
+
+        const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const isDuplicate = savedCartItems.some(item => 
+            item.article === article &&
+            item.width === width &&
+            item.height === height
+        );
+
+        if (!isDuplicate) {
+            savedCartItems.push(newItem);
+            localStorage.setItem("cartItems", JSON.stringify(savedCartItems));
+            addCartItemToDOM(newItem);
+        }
+    }
+
+    // Завантажуємо товари при завантаженні сторінки
+    loadCartItems();
+
+    // Слухач для кнопки "Продовжити покупки"
+    const continueShoppingButton = document.getElementById("continue-shopping");
+    if (continueShoppingButton) {
+        continueShoppingButton.addEventListener("click", () => {
+            saveCartItems();
+            alert("Товари збережено! Ви можете продовжити покупки.");
+        });
+    }
+</script>
+
+
+
+<script src="script.js"></script>
+<script src="api.js"></script>
+<script src="basket.js"></script>
+
+</body>
+</html>

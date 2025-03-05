@@ -1,0 +1,610 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: #285a1e;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+header.scrolled{
+    background: #285a1e; 
+}
+header.scrolled .logo,
+header.scrolled nav ul li a,
+header.scrolled .icons i {
+    color: white; /* Робимо текст білим */
+}
+.logo{
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+    transition: color 0.3 ease;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3 ease;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.icons {
+    position: relative;
+    font-size: 24px;
+    display: flex;
+    gap: 15px;
+}
+
+.icons i {
+    color: white;
+    transition: color 0.3s ease;
+    position: relative; /* Додаємо relative, щоб картка лічильника позиціювалася відносно іконки */
+}
+
+.cart-count {
+    background: red;
+    color: white;
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px; /* Відстань від верхнього краю іконки */
+    right: -10px; /* Відстань від правого краю іконки */
+}
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.burger-menu .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Клас для відкритого меню */
+.burger-nav.open {
+    display: block;
+}
+
+/* Клас для перетворення бургер-меню в хрестик */
+.burger-menu.open .line:nth-child(1) {
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.burger-menu.open .line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.open .line:nth-child(3) {
+    transform: rotate(-45deg);
+    position: absolute;
+}
+
+/* Бургер-меню для мобільних */
+.burger-nav {
+    display: none; /* Ховаємо бургер-меню на великих екранах */
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #285a1e;
+    width: 50%;
+    height: 100%;
+    padding-top: 60px;
+    z-index: 999;
+}
+
+.burger-nav-links {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.burger-nav-links li {
+    margin: 15px 0;
+}
+
+.burger-nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Стилі для мобільних екранів */
+@media (max-width: 700px) {
+    nav ul {
+        display: none; /* Сховуємо меню на маленьких екранах */
+    }
+
+    .burger-menu {
+        display: flex; /* Показуємо бургер-меню на мобільних екранах */
+    }
+
+    .burger-nav.open {
+        display: block; /* Показуємо бургер-меню при відкритті */
+    }
+}
+/* Стилі для мобільних екранів */
+@media (max-width: 700px) {
+    nav ul {
+        display: none; /* Сховуємо меню на маленьких екранах */
+    }
+
+    .burger-menu {
+        display: flex; /* Показуємо бургер-меню на мобільних екранах */
+    }
+
+    .burger-nav.open {
+        display: block; /* Показуємо бургер-меню при відкритті */
+    }
+}
+
+/* Адаптація для екрану шириною до 600px */
+@media (max-width: 600px) {
+    header {
+        padding: 15px 30px; /* Менше відступів */
+    }
+
+    .banner-content h1 {
+        font-size: 40px; /* Зменшуємо розмір заголовка */
+    }
+
+    .banner-content p {
+        font-size: 20px; /* Зменшуємо розмір тексту */
+    }
+
+    .btn {
+        font-size: 20px; /* Зменшуємо розмір кнопки */
+    }
+
+    .burger-menu {
+        gap: 7px; /* Трохи збільшуємо відстань між лініями бургер-меню */
+    }
+
+    .burger-menu .line {
+        width: 28px; /* Збільшуємо ширину лінії */
+    }
+
+    .burger-nav-links li a {
+        font-size: 20px; /* Зменшуємо розмір шрифта для мобільних екранів */
+    }
+    .banner{
+        height: 400px;
+    }
+}
+
+/* Адаптація для екрану шириною до 500px */
+@media (max-width: 500px) {
+    .banner-content h1 {
+        font-size: 35px; /* Зменшуємо заголовок */
+    }
+
+    .logo{
+        font-size: 24px;
+    }
+
+    .banner-content p {
+        font-size: 18px; /* Зменшуємо текст */
+    }
+
+    .btn {
+        font-size: 18px; /* Зменшуємо розмір кнопки */
+        padding: 10px 20px; /* Зменшуємо padding */
+    }
+
+    .burger-menu {
+        gap: 6px; /* Зменшуємо відстань між лініями бургер-меню */
+    }
+
+    .burger-menu .line {
+        width: 26px; /* Зменшуємо ширину лінії */
+    }
+
+    .burger-nav-links li a {
+        font-size: 18px; /* Зменшуємо розмір шрифта для мобільних екранів */
+    }
+}
+
+/* Адаптація для екрану шириною до 400px */
+@media (max-width: 400px) {
+    header {
+        padding: 10px 15px; /* Ще менше відступів */
+    }
+    .logo{
+        font-size: 22px;
+    }
+    .banner-content h1 {
+        font-size: 30px; /* Зменшуємо заголовок */
+    }
+
+    .banner-content p {
+        font-size: 16px; /* Зменшуємо текст */
+    }
+
+    .btn {
+        font-size: 16px; /* Зменшуємо розмір кнопки */
+        padding: 8px 15px; /* Зменшуємо padding */
+    }
+
+    .burger-menu {
+        gap: 5px; /* Зменшуємо відстань між лініями бургер-меню */
+    }
+
+    .burger-menu .line {
+        width: 23px; /* Зменшуємо ширину лінії */
+    }
+
+    .burger-nav-links li a {
+        font-size: 16px; /* Зменшуємо розмір шрифта для мобільних екранів */
+    }
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 20px;
+    margin-top: 0px;
+}
+.content {
+    flex-grow: 1;
+}
+h1 {
+    display: flex;
+    font-size: 23px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #285a1e;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+}
+/* Каталог */
+.products {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+} 
+    .cproducts {
+    padding: 20px 0;
+    }
+    .products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #004d00;
+    margin-top: 20px;
+    font-size: 26px !important;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .products h1 {
+    text-align: center;
+    justify-content: center;
+    margin: 20px;
+    color: #004d00;
+    font-size: 26px; 
+    
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    
+    .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    
+    }
+    .product-card {
+    width: 295px; /* Картка займає всю доступну ширину */
+    height: 100%; /* Встановлюємо фіксовану висоту картки */
+    border-top: 2px solid #006400; /* Зелена лінія зверху */
+    border-right: 2px solid #006400; /* Зелена лінія зверху */
+    background-color: rgba(255, 255, 255, 0.826); /* Легкий напівпрозорий фон */
+    border-radius: 8px; /* Заокруглені кути */
+    text-align: center; /* Центруємо текст */
+    padding: 5px; /* Відступи всередині картки */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь для ефекту піднятості */
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавні анімації при наведенні */
+    }
+    
+    
+    .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .product-card p{
+    font-size: 17px;
+    margin: 10px 0;
+    color: #004d00;
+    font-family: Georgia, 'Times New Roman', Times, serif
+    }
+    
+    .product-card img {
+    width: 100%;
+    height: 295px;
+    margin-bottom: 0px;
+    border-radius: 8px 8px 0 0;
+    }
+    
+    .product-card button {
+    background-color: #006400;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 7px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 5px;
+    }
+        
+    .product-card button:hover {
+    background-color: #004d00;
+    }
+    .price{
+    margin-bottom: 10px;
+}
+.buttons-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin: 50px auto;
+}
+.continue-shopping {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #004d00; /* Синій колір кнопки */
+    color: #fff; /* Білий текст */
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px; /* Закруглені кути */
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.continue-shopping:hover {
+    background-color: #285a1e; /* Темніший відтінок синього */
+    transform: scale(1.05); /* Невелике збільшення при наведенні */
+}
+
+.continue-shopping:active {
+    background-color: #285a1e;
+    transform: scale(0.98);
+}
+
+/* Футер */
+.footer {
+    background-color: #094c09;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #f0fff0;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+    
+.footer-social img, .footer-payment img {
+    height: 24px;
+    margin-right: 10px;
+}
+    
+.footer-middle {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+    
+.footer-column h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.footer-column ul li {
+    margin-bottom: 5px;
+}
+.footer-column ul li a {
+    text-decoration: none;
+    color: #f0fff0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.footer-column ul li a:hover {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: underline;
+}
+.footer-info p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 5px 0;
+}
+.footer-currency, .footer-lang {
+    font-size: 14px;
+}
+.footer-info h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 10px;
+}
+.footer-lang a {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+    color: #333;
+    margin: 0 5px;
+}
+.footer-lang a:hover {
+    text-decoration: underline;
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+    @media (max-width: 700px) {
+    .footer-top {
+        flex-direction: column; /* Елементи розташовуються у стовпчик */
+        align-items: flex-start; /* Вирівнюємо по лівому краю */
+    }
+    
+    .footer-middle {
+        flex-direction: column; /* Колонки розташовуються у стовпчик */
+        gap: 20px; /* Відступ між колонками */
+    }
+    
+    .footer-column h3 {
+        font-size: 14px; /* Зменшення розміру заголовків */
+    }
+    
+    .footer-column ul li a {
+        font-size: 14px; /* Зменшення розміру тексту посилань */
+    }
+    
+    .footer-bottom {
+        flex-direction: column; /* Розташування елементів у стовпчик */
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .footer-bottom p {
+        margin-bottom: 10px;
+    }
+    }
+    
+    @media (max-width: 600px) {
+    .footer {
+        padding: 15px; /* Зменшення внутрішніх відступів */
+    }
+    
+    .footer-top {
+        align-items: center; /* Центрування елементів */
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .footer-social img, .footer-payment img {
+        height: 20px; /* Зменшення розміру іконок */
+        margin-right: 8px;
+    }
+    
+    .footer-column h3 {
+        font-size: 13px; /* Ще менший розмір заголовків */
+    }
+    
+    .footer-column ul li a {
+        font-size: 13px; /* Менший текст у посиланнях */
+    }
+    
+    .footer-currency, .footer-lang {
+        font-size: 12px; /* Зменшення тексту валюти і мови */
+    }
+    }
+    
+    @media (max-width: 500px) {
+    .footer-top {
+        text-align: center; /* Центрування тексту */
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .footer-middle {
+        gap: 15px; /* Менший відступ між колонками */
+        align-items: center;
+    }
+    
+    .footer-column {
+        text-align: center; /* Центрування тексту у колонках */
+    }
+    
+    .footer-column ul li {
+        margin-bottom: 3px; /* Зменшення відступів між пунктами */
+    }
+    
+    .footer-social img, .footer-payment img {
+        height: 18px; /* Ще менший розмір іконок */
+    }
+    }
+    
+    @media (max-width: 400px) {
+    .footer {
+        padding: 10px; /* Мінімальні внутрішні відступи */
+    }
+    
+    .footer-top {
+        gap: 10px; /* Зменшення відстані між елементами */
+    }
+    
+    .footer-middle {
+        gap: 10px; /* Ще менший відступ між колонками */
+    }
+    
+    .footer-column h3 {
+        font-size: 12px; /* Найменший розмір заголовків */
+    }
+    
+    .footer-column ul li a {
+        font-size: 12px; /* Найменший текст посилань */
+    }
+    
+    .footer-social img, .footer-payment img {
+        height: 16px; /* Найменший розмір іконок */
+    }
+    
+    .footer-bottom {
+        text-align: center; /* Центрування всього тексту */
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-bottom p {
+        font-size: 12px; /* Найменший розмір тексту */
+    }
+}
+      
